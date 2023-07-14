@@ -1,0 +1,38 @@
+.general {
+    height: 100vh;
+    background-image: url('../../../assets/background-login.jpg');
+    background-size: cover;
+  }
+  
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .box-login {
+    background-color: rgb(255, 255, 255); 
+    padding: 20px;
+    border-radius: 10px;
+    padding: 50px 50px 50px 50px;
+    box-shadow: 3px 8px 10px -3px black;
+    color: black;
+    text-align: center;
+  }
+  .subtitle{
+    margin-bottom: 50px;
+  }
+  .btnLogin{
+    width: 60%;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+    background-color: #5348cb;
+    color: white;
+    margin-top: 50px;
+    cursor: pointer;
+  }
+  
+  
+  
