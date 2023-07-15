@@ -1,6 +1,7 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Global from "../components/core/Global/global";
+import { TokenContext } from "../components/context/tokenContext";
  
 
 export const ApiContext = createContext();
@@ -16,55 +17,24 @@ export const ApiContextProvider = ({ children }) => {
   const [profile, setProfile] = useState("https://api.spotify.com/v1/me/");
   const [search, setSearch] = useState("Beyonce");
 
+ 
+ async function searcher (){
+  console.log("buscar" + search);
 
-  
-  useEffect(() => {
-    let authParameters = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body:
-        "grant_type=client_credentials&client_id=" +
-        CLIENT_ID +
-        "&client_secret=" +
-        CLIENT_SECRET,
-    };
-
-    axios.post("https://accounts.spotify.com/api/token", null, {
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      params: authParameters,
-    })
-    .then((response) => {
-      const data = response.data;
-      setAccessToken(data.access_token);
-    })
-    .catch((error) => {
-      console.error("Failed to obtain access token:", error);
-    });
-}, []);
-
-useEffect(()=>{
-  console.log(search);
-  const params = {
+  let artistParams = {
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + accessToken,
-    },
-  };
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer ' + window.localStorage.access_token
+    }
+  } 
+  let artistId = await fetch ('https://api.spotify.com/v1/search?q=' + search + '&type=artist' , artistParams  )
+  .then(res => res.json())
+  .then(data => console.log(data));
+ }
 
-  axios.get("https://api.spotify.com/v1/search?q" + search + params)
-    .then((response) => {
-      const data = response.data;
-      console.log(data);
-    })
-    .catch((error) => {
-      console.error("Failed to search:", error);
-    });
 
-},[accessToken, search])
+
 
   
 
