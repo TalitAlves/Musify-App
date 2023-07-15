@@ -6,6 +6,7 @@ import Header from "./components/core/Header/Header";
 import { TokenContext } from "./components/context/tokenContext";
 import { RefreshTokenContext } from "./components/context/refreshTokenContext";
 
+
 function App()  {
   
 
@@ -17,13 +18,14 @@ function App()  {
       <>
        <RefreshTokenContext.Provider value={{refresh, setRefresh}}>
         <TokenContext.Provider value={{token, setToken}}>
-          <BrowserRouter>
+           <BrowserRouter>
             <Header />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
             </Routes>
           </BrowserRouter>
+     
         </TokenContext.Provider>
         </RefreshTokenContext.Provider>
       </>
