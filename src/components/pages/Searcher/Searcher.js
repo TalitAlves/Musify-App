@@ -3,21 +3,8 @@ import { useState } from 'react';
 
 const Searcher = ({artists}) => {
 
-    //es para quedarnos con el array de objetos que se llama items (está adentro del objeto artist que devuelve la api)
-    const artist = artists.artists.items;
-    console.log(artist);
-
-/*     
-    const artistData = artist.map((eachElement) => {
-        const { genres, images, id, name } = eachElement;
-        return { genres, images, id, name };
-    });
-
-    console.log(artistData); */
-
     //variable de estado para guardar los datos de busqueda que introduce el usuario
     const [ artistSearch, setArtistSearch ] = useState('');
-
 
     //función para cambiar el valor del input según lo que escribe el usuario
     const handleChange = (event) => {
