@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ApiContext } from '../../../services/Api';
 
 const List = () => {
-  return (
-    <div>List</div>
-  )
+  const {apiResponse} = useContext(ApiContext)
+   
+  
+  if(apiResponse){ 
+    return (
+      <>
+        {apiResponse.tracks?.items?.map((music) => (
+          <div key={music.id}>
+            {music.name}
+          </div>
+        ))}
+      </>
+    );
+  }
+  return null
 }
 
 export default List;

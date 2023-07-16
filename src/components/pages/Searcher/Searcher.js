@@ -1,35 +1,34 @@
 import './Searcher.css';
-import { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { ApiContext } from '../../../services/Api';
 
-const Searcher = ({artists}) => {
+const Searcher = ({ setFilteredArtists, setSearch }) => {
+    const { apiResponse } = useContext(ApiContext);
+    const [ searchValue, setSearchValue ] = useState('');
 
-    //variable de estado para guardar los datos de busqueda que introduce el usuario
-    const [ artistSearch, setArtistSearch ] = useState('');
-
-    //función para cambiar el valor del input según lo que escribe el usuario
-    const handleChange = (event) => {
-        const value = event.target.value;
-        setArtistSearch(value);
-        console.log(value);
-    }
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setSearchValue(value);
+    };
 
     const handleClick = () => {
-        console.log("botón funcionando");
-    }
+        setFilteredArtists(searchValue);
+    };
 
     return (
         <div className='searcher'>
             <h1>BUSCA TU ARTISTA PREFERIDO</h1>
 
-            <input 
-            className='searcher-input' 
-            type='text' 
-            value={artistSearch} 
-            onChange={handleChange} />
+            <input
+                className='searcher-input'
+                type='text'
+                onChange={handleChange}
+                value={searchValue}
+            />
 
             <button onClick={handleClick}>buscar</button>
         </div>
-    )
-}
+    );
+};
 
 export default Searcher;
