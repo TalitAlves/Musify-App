@@ -18,6 +18,8 @@ const Searcher = ({artists}) => {
     //variable de estado para guardar los datos de busqueda que introduce el usuario
     const [ artistSearch, setArtistSearch ] = useState('');
 
+
+    //función para cambiar el valor del input según lo que escribe el usuario
     const handleChange = (event) => {
         const value = event.target.value;
         setArtistSearch(value);
