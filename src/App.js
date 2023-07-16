@@ -5,10 +5,12 @@ import Login from "./components/pages/Login/Login";
 import Header from "./components/core/Header/Header";
 import { TokenContext } from "./context/tokenContext";
 import { RefreshTokenContext } from "./context/refreshTokenContext";
+import List from "./components/pages/List/List";
 
 function App() {
   // Aquí comienza la llamada a la API
   const [ search, setSearch ] = useState("Beyonce");
+ 
 
   async function searcher() {
     console.log("buscar " + search);
@@ -30,8 +32,10 @@ function App() {
         });
     } catch (error) {
       console.log("La llamada a la API no funciona", error);
+    
     }
   }
+  
   // Aquí termina la llamada a la API
 
   const [ token, setToken ] = useState(window.localStorage.access_token ? window.localStorage.access_token : null);
@@ -46,6 +50,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Home artists={search} />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/list" element={<List />} />
+
+              
             </Routes>
           </BrowserRouter>
           <button onClick={searcher}>pulsar</button>
