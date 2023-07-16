@@ -6,4 +6,4 @@ const List = () => {
   )
 }
 
-export default List
+export default List;

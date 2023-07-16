@@ -1,11 +1,16 @@
+import spotifyBackground from '../../../assets/spotify-background.png';
+import './Home.css';
 
-const Home = () => {
-  
+const Home = ({artists}) => {
+
   return (
-    <>
-      <h1> Esto es la home</h1>
-    </>
+    <div className='home-page'>
+    <img src={spotifyBackground} alt='spotify background'/>
+      <div>
+        
+      </div>
+    </div>
   )
 }
 
-export default Home
+export default Home;

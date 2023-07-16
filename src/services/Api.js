@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Global from "../components/core/Global/global";
-import { TokenContext } from "../components/context/tokenContext";
+import { TokenContext } from "../context/tokenContext";
  
 
 export const ApiContext = createContext();
@@ -32,12 +32,6 @@ export const ApiContextProvider = ({ children }) => {
   .then(res => res.json())
   .then(data => console.log(data));
  }
-
-
-
-
-  
-
 
 
   return (
