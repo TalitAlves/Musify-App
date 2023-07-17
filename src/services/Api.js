@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const ApiContext = createContext();
 ApiContext.displayName = "ApiContext"
@@ -7,7 +7,7 @@ ApiContext.displayName = "ApiContext"
 export const ApiContextProvider = ({ children }) => {
   
   const [apiResponse, setApiResponse] = useState([]);
-  const [search, setSearch] = useState("Flowers"); 
+  const [search, setSearch] = useState("home"); 
   const [type, setType] = useState("artist") //se puede cambiar el type y buscar por album", "artist", "playlist", "track", "show", "episode", "audiobook"
  
   const search_URL = `https://api.spotify.com/v1/search?q=${search}&type=${type}`
@@ -17,7 +17,6 @@ export const ApiContextProvider = ({ children }) => {
  
   useEffect(() => {
     setEndpoint(search_URL); //se puede atualizar que endpoint llamar
-        
   }, [setEndpoint]);
    
    
@@ -40,7 +39,7 @@ export const ApiContextProvider = ({ children }) => {
       } catch (error) {
         console.log("La llamada a la API no funciona", error);
       }
-    };
+    }
 
     fetchData();
   }, [endpoint]);
@@ -53,5 +52,3 @@ export const ApiContextProvider = ({ children }) => {
     </ApiContext.Provider>
   );
 };
-
-

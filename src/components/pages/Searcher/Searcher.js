@@ -1,19 +1,37 @@
-import './Searcher.css';
-import React, { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ApiContext } from '../../../services/Api';
+import './Searcher.css';
 
-const Searcher = ({ setFilteredArtists, setSearch }) => {
-    const { apiResponse } = useContext(ApiContext);
-    const [ searchValue, setSearchValue ] = useState('');
+const Searcher = () => {
 
-    const handleChange = (e) => {
-        const value = e.target.value;
-        setSearchValue(value);
-    };
+    //1. setSearch para cambiar el valor de la variable de estado search (l. 10 en Api.js)
+    const { setSearch, search } = useContext(ApiContext);
 
+    //2. variable para guardar el value del campo de entrada
+    const [ searchTerm, setSearchTerm ] = useState('');
+
+    //3. función que recoge el valor del input
+    const handleInputChange = (ev) => {
+        const inputValue = ev.target.value;
+        setSearchTerm(inputValue);
+    }
+
+    const logSearchValue = () => {
+        console.log('Valor actual de "search":', search);
+    }
+
+    //4. función manejadora del evento (del botón)
+    //le envía a search (la variable de estado del context) los datos del input
     const handleClick = () => {
-        setFilteredArtists(searchValue);
-    };
+        setSearch(searchTerm);
+        logSearchValue(); // con esto vemos el valor actual de search (api.js)
+    }
+
+    // useEffect para llamar a 'handleClick' cuando 'searchTerm' cambie
+    useEffect(() => {
+        handleClick();
+    }, [ searchTerm, handleClick ]);
+
 
     return (
         <div className='searcher'>
@@ -22,8 +40,8 @@ const Searcher = ({ setFilteredArtists, setSearch }) => {
             <input
                 className='searcher-input'
                 type='text'
-                onChange={handleChange}
-                value={searchValue}
+                value={searchTerm}
+                onChange={handleInputChange}
             />
 
             <button onClick={handleClick}>buscar</button>
