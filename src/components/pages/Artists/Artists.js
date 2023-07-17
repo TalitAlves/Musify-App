@@ -8,7 +8,8 @@ const Artists = () => {
   //console.log(apiResponse); 
 
   //prueba para filtrar los artistas
-  const filteredArtists = apiResponse?.artists?.items?.filter((artist) => artist.name.toLoWerCase().includes(searh.toLoWerCase()));
+  const filteredArtists = apiResponse?.artists?.items?.filter((artist) => artist.name.toLowerCase().includes(search.toLowerCase()));
+ 
 
   if (apiResponse && apiResponse.artists && apiResponse.artists.items) {
     return (
@@ -16,7 +17,7 @@ const Artists = () => {
         <h1>Lista de artistas</h1>
         <Searcher />
         <div className='artists-div'>
-          {apiResponse.artists?.items?.map((artist) => {
+          {filteredArtists?.map((artist) => {
             return (
               <div key={artist.id} className='artist.card'>
                 <h2>{artist.name}</h2>
