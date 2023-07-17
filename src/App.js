@@ -7,6 +7,7 @@ import { TokenContext } from "./context/tokenContext";
 import { RefreshTokenContext } from "./context/refreshTokenContext";
 import List from "./components/pages/List/List";
 import Artists from "./components/pages/Artists/Artists";
+import Footer from "./components/core/Footer/Footer";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
               <Route path="/list" element={<List />} />
               <Route path="/artists" element={<Artists />} />
             </Routes>
+            <Footer />
           </BrowserRouter>
         </TokenContext.Provider>
       </RefreshTokenContext.Provider>
