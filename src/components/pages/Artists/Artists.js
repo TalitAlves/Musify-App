@@ -9,8 +9,8 @@ const Artists = () => {
 
   //prueba para filtrar los artistas
   const filteredArtists = apiResponse?.artists?.items?.filter((artist) => artist.name.toLowerCase().includes(search.toLowerCase()));
- 
-
+  console.log(filteredArtists);
+  
   if (apiResponse && apiResponse.artists && apiResponse.artists.items) {
     return (
       <div className='artists'>
@@ -21,7 +21,8 @@ const Artists = () => {
             return (
               <div key={artist.id} className='artist.card'>
                 <h2>{artist.name}</h2>
-                <img src={artist.images[ 0 ].url} alt={artist.name} className='artist-img' />
+                {artist.images && artist.images.length > 0 && (<img src={artist.images[ 0 ].url} alt={artist.name} className='artist-img' />)}
+                {/* <img src={artist.images[ 0 ].url} alt={artist.name} className='artist-img' /> */}
                 {artist.genres && (<p>{artist.genres.join(', ')}</p>)}
               </div>
             )

@@ -7,7 +7,7 @@ ApiContext.displayName = "ApiContext"
 export const ApiContextProvider = ({ children }) => {
   
   const [apiResponse, setApiResponse] = useState([]);
-  const [search, setSearch] = useState("home"); 
+  const [search, setSearch] = useState("house"); 
   const [type, setType] = useState("artist") //se puede cambiar el type y buscar por album", "artist", "playlist", "track", "show", "episode", "audiobook"
  
   const search_URL = `https://api.spotify.com/v1/search?q=${search}&type=${type}`
@@ -18,7 +18,7 @@ export const ApiContextProvider = ({ children }) => {
   useEffect(() => {
     setEndpoint(search_URL); //se puede atualizar que endpoint llamar
   }, [setEndpoint]);
-   
+  
    
   useEffect(() => {
     const fetchData = async () => {
