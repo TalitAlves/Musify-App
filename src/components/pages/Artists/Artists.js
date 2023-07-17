@@ -4,8 +4,11 @@ import { useContext } from 'react';
 import { ApiContext } from '../../../services/Api';
 
 const Artists = () => {
-  const { apiResponse } = useContext(ApiContext);
+  const { apiResponse, search } = useContext(ApiContext);
   //console.log(apiResponse); 
+
+  //prueba para filtrar los artistas
+  const filteredArtists = apiResponse?.artists?.items?.filter((artist) => artist.name.toLoWerCase().includes(searh.toLoWerCase()));
 
   if (apiResponse && apiResponse.artists && apiResponse.artists.items) {
     return (
