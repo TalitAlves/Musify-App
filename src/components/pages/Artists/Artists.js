@@ -9,7 +9,7 @@ const Artists = () => {
 
   //prueba para filtrar los artistas
   const filteredArtists = apiResponse?.artists?.items?.filter((artist) => artist.name.toLowerCase().includes(search.toLowerCase()));
-  console.log(filteredArtists);
+  //console.log(filteredArtists);
   
   if (apiResponse && apiResponse.artists && apiResponse.artists.items) {
     return (

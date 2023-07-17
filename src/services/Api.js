@@ -17,7 +17,7 @@ export const ApiContextProvider = ({ children }) => {
  
   useEffect(() => {
     setEndpoint(search_URL); //se puede atualizar que endpoint llamar
-  }, [setEndpoint]);
+  }, [search_URL]);
   
    
   useEffect(() => {
