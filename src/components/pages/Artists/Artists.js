@@ -1,43 +1,36 @@
-import './Artists.css';
-import Searcher from '../Searcher/Searcher';
-import { useContext, useEffect } from 'react';
-import { ApiContext } from '../../../services/Api';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { ApiContext } from "../../../services/Api";
+import Searcher from "../Searcher/Searcher";
+import './Artists.css'
 
 const Artists = () => {
-  const { apiResponse, search , setEndpoint, search_URL} = useContext(ApiContext);
-  //console.log(apiResponse); 
+  const { apiResponse, search } = useContext(ApiContext);
+  // Prueba para filtrar los artistas
+  const filteredArtists = apiResponse?.artists?.items?.filter((artist) =>
+    artist.name.toLowerCase().includes(search.toLowerCase())
+  );
 
-  useEffect(() => {
-    setEndpoint(search_URL)
-        
-  }, [search_URL ]);
 
-  //prueba para filtrar los artistas
-  const filteredArtists = apiResponse?.artists?.items?.filter((artist) => artist.name.toLowerCase().includes(search.toLowerCase()));
-  //console.log(filteredArtists);
-  
-  if (apiResponse && apiResponse.artists && apiResponse.artists.items) {
-    return (
-      <div className='artists'>
-        <h1>Lista de artistas</h1>
-        <h1>BUSCA TU ARTISTA PREFERIDO</h1>
-        <Searcher type={"artist"}/>
-        <div className='artists-div'>
-          {filteredArtists?.map((artist) => {
-            return (
-              <div key={artist.id} className='artist.card'>
-                <h2>{artist.name}</h2>
-                {artist.images && artist.images.length > 0 && (<img src={artist.images[ 0 ].url} alt={artist.name} className='artist-img' />)}
-                {/* <img src={artist.images[ 0 ].url} alt={artist.name} className='artist-img' /> */}
-                {artist.genres && (<p>{artist.genres.join(', ')}</p>)}
-              </div>
-            )
-          })}
-        </div>
+  return (
+    <div className="artists">
+      <h1>Lista de artistas</h1>
+      <Searcher type={"artist"}/>
+      <div className="artists-div">
+        {filteredArtists?.map((artist) => (
+          <Link to={`/artists/${artist.id}`} key={artist.id} className="artist-card-link">
+            <div className="artist-card">
+              <h2>{artist.name}</h2>
+              {artist.images && artist.images.length > 0 && (
+                <img src={artist.images[0].url} alt={artist.name} className="artist-img" />
+              )}
+              {artist.genres && <p>{artist.genres.join(", ")}</p>}
+            </div>
+          </Link>
+        ))}
       </div>
-    );
-  }
-  return null;
+    </div>
+  );
 };
 
 export default Artists;

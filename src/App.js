@@ -10,6 +10,7 @@ import Artists from "./components/pages/Artists/Artists";
 import Footer from "./components/core/Footer/Footer";
 import Playlist from "./components/pages/Playlist/Playlist"
 import PlaylistCreator from "./components/pages/Playlist/PlaylistCreator";
+import Details from "./components/pages/ArtistDetails/Details";
 
 function App() {
 
@@ -29,6 +30,8 @@ function App() {
               <Route path="/artists" element={<Artists />} />
               <Route path="/playlist" element={<PlaylistCreator />} />
               <Route path="/playlist/:id" element={<Playlist />} />
+              <Route path="/artists/:id" element={<Details />} />
+
 
 
             </Routes>
