@@ -20,6 +20,9 @@ const Header = () => {
         <li>
           <Link to="/playlist">Playlist</Link>
         </li>
+        <li>
+          <Link to="/getplaylist">Get Playlist</Link>
+        </li>
       </ul>
     </div>
   );

@@ -59,9 +59,7 @@ function PlaylistCreator() {
           Authorization: "Bearer " + access_token,
           "Content-Type": "application/json",
         },
-        params: {
-          "scope": "playlist-modify-private",
-        }, 
+        
       });
       setCreatedPlaylist(response.data);
       console.log(response.data);
@@ -87,7 +85,7 @@ function PlaylistCreator() {
 
       {links.map((link, index) => (
         <div key={index}>
-          <Link to={`/playlist/${link.link}`}>{link.name}</Link>
+        
         </div>
       ))}
 
