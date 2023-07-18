@@ -11,6 +11,7 @@ import Footer from "./components/core/Footer/Footer";
 import Playlist from "./components/pages/Playlist/Playlist"
 import PlaylistCreator from "./components/pages/Playlist/PlaylistCreator";
 import Details from "./components/pages/ArtistDetails/Details";
+import TrackDetail from "./components/pages/TrackDetail/TrackDetail";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/track/track:id" element={<TrackDetail />}/>
               <Route path="/login" element={<Login />} />
               <Route path="/list" element={<List />} />
               <Route path="/artists" element={<Artists />} />

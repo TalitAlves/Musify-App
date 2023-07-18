@@ -54,7 +54,7 @@ export const ApiContextProvider = ({ children }) => {
   }, [ endpoint ]);
 
 
-  // petición API para obtener canciones para la Home
+  // petición API para obtener canciones (tracks) para la Home
   const [ trackApiResponse, setTrackApiResponse ] = useState([]);
 
   const track_URL = "https://api.spotify.com/v1/search?q=album&type=track&limit=20"; // URL con q= album | type=track | limit=20 tracks
@@ -123,9 +123,7 @@ export const ApiContextProvider = ({ children }) => {
 
   //petición API para obtener recommendations
   const [ recommendationsResponse, setRecommendationsResponse ] = useState([]);
-
   const recommendations_URL = "https://api.spotify.com/v1/recommendations?limit=10&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Cjrock%2Calt-rock%2Cpop&seed_tracks=0c6xIDDpzE81m2q797ordA";
-
   const [ recommendationsEndpoint, setRecommendationsEndpoint ] = useState("");
 
   useEffect(() => {
@@ -184,4 +182,3 @@ export const ApiContextProvider = ({ children }) => {
     </ApiContext.Provider>
   );
 };
-
