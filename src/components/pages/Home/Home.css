@@ -5,12 +5,14 @@
 
 .home-title{
     text-align: center;
+    padding-top: 50px;
 }
 
 .tracks-container{
     display: flex;
     flex-direction: row;
     overflow-y: hidden;
+    padding-bottom: 100px;
 }
 
 .track-album-image{
@@ -18,10 +20,20 @@
     height: 200px;
 }
 
-.track-album-div{
+.track-card{
+    border: 2px solid rgba(255, 255, 255, 0.306);
+    border-radius: 30px;
     margin: 0px 15px 0px 15px;
+    padding: 0px 10px;
     width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.track-card:hover{
+    border:1px solid rgba(255, 255, 255, 0.866);
+    cursor: pointer;
 }

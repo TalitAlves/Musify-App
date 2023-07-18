@@ -4,7 +4,7 @@ import "./Header.css";
 const Header = () => {
   return (
     <div className="center">
-      <ul>
+      <ul className="nav-list">
         <li className="pages">
           <Link to="/">Inicio</Link>
         </li>
