@@ -12,6 +12,8 @@ export const ApiContextProvider = ({ children }) => {
 
   const search_URL = `https://api.spotify.com/v1/search?q=${search}&type=${type}`
   const profile_URL = `https://api.spotify.com/v1/me`
+  const access_token = window.localStorage.access_token
+  
 
   const [ endpoint, setEndpoint ] = useState("")
 
@@ -96,7 +98,8 @@ export const ApiContextProvider = ({ children }) => {
         track_URL,
         trackApiResponse,
         trackEndpoint,
-        setTrackEndpoint
+        setTrackEndpoint,
+        access_token
       }}>
       {children}
     </ApiContext.Provider>
