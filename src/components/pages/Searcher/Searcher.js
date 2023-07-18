@@ -3,21 +3,13 @@ import { ApiContext } from '../../../services/Api';
 import './Searcher.css';
 
 const Searcher = () => {
-
-    //1. setSearch para cambiar el valor de la variable de estado search (l. 10 en Api.js)
     const { setSearch } = useContext(ApiContext);
+    const [searchTerm, setSearchTerm] = useState('');
 
-    //2. variable para guardar el value del campo de entrada
-    const [ searchTerm, setSearchTerm ] = useState('');
-
-    //3. función que recoge el valor del input
     const handleInputChange = (ev) => {
-        const inputValue = ev.target.value;
-        setSearchTerm(inputValue);
+        setSearchTerm(ev.target.value);
     }
 
-    //4. función manejadora del evento (del botón)
-    //le envía a search (la variable de estado del context) los datos del input
     const handleClick = () => {
         setSearch(searchTerm);
     }
