@@ -4,11 +4,11 @@ export const ApiContext = createContext();
 ApiContext.displayName = "ApiContext";
 
 export const ApiContextProvider = ({ children }) => {
-  const [apiResponse, setApiResponse] = useState([]);
-  const [search, setSearch] = useState("house");
-  const [type, setType] = useState("artist");
-  const [artistId, setArtistId] = useState(""); 
-  const [artistAlbums, setArtistAlbums] = useState([]);
+  const [ apiResponse, setApiResponse ] = useState([]);
+  const [ search, setSearch ] = useState("house");
+  const [ type, setType ] = useState("artist");
+  const [ artistId, setArtistId ] = useState("");
+  const [ artistAlbums, setArtistAlbums ] = useState([]);
 
 
   const search_URL = `https://api.spotify.com/v1/search?q=${search}&type=${type}`;
@@ -18,11 +18,11 @@ export const ApiContextProvider = ({ children }) => {
   const access_token = window.localStorage.access_token
 
 
-  const [endpoint, setEndpoint] = useState("");
+  const [ endpoint, setEndpoint ] = useState("");
 
   useEffect(() => {
     setEndpoint(search_URL);
-  }, [search_URL]);
+  }, [ search_URL ]);
 
   useEffect(() => {
     const fetchTrackData = async () => {
@@ -42,7 +42,7 @@ export const ApiContextProvider = ({ children }) => {
         console.log("Datos guardados en apiResponse:", data);
 
         if (data && data.artists && data.artists.items.length > 0) {
-          const artistId = data.artists.items[0].id; 
+          const artistId = data.artists.items[ 0 ].id;
           setArtistId(artistId);
         }
       } catch (error) {
@@ -82,17 +82,59 @@ export const ApiContextProvider = ({ children }) => {
         setTrackApiResponse(data);
         console.log("Respuesta de la API para los tracks", data);
       } catch (error) {
-        console.log("intento de API call fallido")
+        console.log("intento de API call fallido", error)
       }
     }
 
     fetchData();
   }, [ trackEndpoint ]);
 
-useEffect(() => {
-  const fetchArtistDetails = async () => {
-    try {
-      if (artistId) {
+  useEffect(() => {
+    const fetchArtistDetails = async () => {
+      try {
+        if (artistId) {
+          let authParams = {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + window.localStorage.access_token,
+            },
+          };
+
+          const response = await fetch(`${ArtistsIdUrl}/${artistId}`, authParams);
+          const data = await response.json();
+
+          console.log("Detalles del artista seleccionado:", data);
+
+          const albumsResponse = await fetch(`${albums_URL}`, authParams);
+          const albumsData = await albumsResponse.json();
+
+          setArtistAlbums(albumsData.items);
+          console.log("Álbumes del artista:", albumsData.items);
+        }
+      } catch (error) {
+        console.log("Error al obtener detalles del artista:", error);
+      }
+    };
+
+    fetchArtistDetails();
+  }, [ artistId, ArtistsIdUrl ]);
+
+
+  //petición API para obtener recommendations
+  const [ recommendationsResponse, setRecommendationsResponse ] = useState([]);
+
+  const recommendations_URL = "https://api.spotify.com/v1/recommendations?limit=10&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Cjrock%2Calt-rock%2Cpop&seed_tracks=0c6xIDDpzE81m2q797ordA";
+
+  const [ recommendationsEndpoint, setRecommendationsEndpoint ] = useState("");
+
+  useEffect(() => {
+    setRecommendationsEndpoint(recommendations_URL);
+  }, [ recommendations_URL ]);
+
+  useEffect(() => {
+    const fetchRec = async () => {
+      try {
         let authParams = {
           method: "GET",
           headers: {
@@ -101,24 +143,17 @@ useEffect(() => {
           },
         };
 
-        const response = await fetch(`${ArtistsIdUrl}/${artistId}`, authParams);
-        const data = await response.json();
+        const res = await fetch(recommendationsEndpoint, authParams);
+        const data = await res.json();
 
-        console.log("Detalles del artista seleccionado:", data);
-
-        const albumsResponse = await fetch(`${albums_URL}`, authParams);
-        const albumsData = await albumsResponse.json();
-
-        setArtistAlbums(albumsData.items);
-        console.log("Álbumes del artista:", albumsData.items);
+        setRecommendationsResponse(data);
+        console.log("Respuesta de la API para las recomendaciones", data);
+      } catch (error) {
+        console.log("intento rec fallido", error)
       }
-    } catch (error) {
-      console.log("Error al obtener detalles del artista:", error);
     }
-  };
-
-  fetchArtistDetails();
-}, [artistId, ArtistsIdUrl]);
+    fetchRec();
+  }, [ recommendationsEndpoint ]);
 
   return (
     <ApiContext.Provider
@@ -137,12 +172,16 @@ useEffect(() => {
         trackEndpoint,
         setTrackEndpoint,
         access_token,
-        artistId, 
-        setArtistId, 
-        artistAlbums
+        artistId,
+        setArtistId,
+        artistAlbums,
+        recommendationsResponse,
+        setRecommendationsEndpoint,
+        recommendations_URL,
+        recommendationsEndpoint,
       }}>
       {children}
     </ApiContext.Provider>
   );
 };
- 
+
