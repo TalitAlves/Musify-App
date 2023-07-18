@@ -5,16 +5,14 @@ ApiContext.displayName = "ApiContext";
 
 export const ApiContextProvider = ({ children }) => {
   const [apiResponse, setApiResponse] = useState([]);
-  const [search, setSearch] = useState("house");
+  const [search, setSearch] = useState("the beatles");
   const [type, setType] = useState("artist");
-  const [artistId, setArtistId] = useState(""); 
-  const [artistAlbums, setArtistAlbums] = useState([]);
+ 
 
 
   const search_URL = `https://api.spotify.com/v1/search?q=${search}&type=${type}`;
   const profile_URL = `https://api.spotify.com/v1/me`;
-  const ArtistsIdUrl = `https://api.spotify.com/v1/artists/`;
-  const albums_URL = `https://api.spotify.com/v1/artists/${artistId}/albums`;
+ 
   const access_token = window.localStorage.access_token
 
 
@@ -39,7 +37,6 @@ export const ApiContextProvider = ({ children }) => {
         const data = await response.json();
 
         setApiResponse(data);
-        console.log("Datos guardados en apiResponse:", data);
 
         if (data && data.artists && data.artists.items.length > 0) {
           const artistId = data.artists.items[0].id; 
@@ -80,7 +77,6 @@ export const ApiContextProvider = ({ children }) => {
         const data = await res.json();
 
         setTrackApiResponse(data);
-        console.log("Respuesta de la API para los tracks", data);
       } catch (error) {
         console.log("intento de API call fallido")
       }
@@ -88,6 +84,11 @@ export const ApiContextProvider = ({ children }) => {
 
     fetchData();
   }, [ trackEndpoint ]);
+
+// petición API para obtener canciones para la details
+const [artistId, setArtistId] = useState(""); 
+const [artistAlbums, setArtistAlbums] = useState([]);
+const ArtistsIdUrl = `https://api.spotify.com/v1/artists`;
 
 useEffect(() => {
   const fetchArtistDetails = async () => {
@@ -104,13 +105,9 @@ useEffect(() => {
         const response = await fetch(`${ArtistsIdUrl}/${artistId}`, authParams);
         const data = await response.json();
 
-        console.log("Detalles del artista seleccionado:", data);
+ 
 
-        const albumsResponse = await fetch(`${albums_URL}`, authParams);
-        const albumsData = await albumsResponse.json();
-
-        setArtistAlbums(albumsData.items);
-        console.log("Álbumes del artista:", albumsData.items);
+       
       }
     } catch (error) {
       console.log("Error al obtener detalles del artista:", error);
@@ -119,6 +116,65 @@ useEffect(() => {
 
   fetchArtistDetails();
 }, [artistId, ArtistsIdUrl]);
+
+useEffect(() => {
+  const fetchAlbums = async () => {
+    try {
+      if (artistId) { 
+        let authParams = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.access_token,
+          },
+        };
+
+        const albumsResponse = await fetch(`${ArtistsIdUrl}/${artistId}/albums?limit=50`, authParams);
+        const albumsData = await albumsResponse.json();
+
+        setArtistAlbums(albumsData.items);
+        console.log("Álbumes del artista:", albumsData.items);
+      }
+    } catch (error) {
+      console.log("Error al obtener los álbumes del artista:", error);
+    }
+  };
+
+  fetchAlbums();
+}, [artistId, ArtistsIdUrl]);
+
+  // petición API para obtener los top tracks del artista
+  const [topTracks, setTopTracks] = useState([]);
+
+
+
+  useEffect(() => {
+    const fetchTopTracks = async () => {
+      try {
+        if (artistId) {
+          let authParams = {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + window.localStorage.access_token,
+            },
+          };
+  
+          const trackResponse = await fetch(`${ArtistsIdUrl}/${artistId}/top-tracks?market=ES`, authParams);
+          const tracksData = await trackResponse.json();
+  
+          if (tracksData && tracksData.tracks && tracksData.tracks.length > 0) {
+            setTopTracks(tracksData.tracks);
+            console.log("Top tracks del artista:", tracksData.tracks);
+          } 
+        }
+      } catch (error) {
+        console.log("Error al obtener los top tracks del artista:", error);
+      }
+    };
+  
+    fetchTopTracks();
+  }, [artistId, ArtistsIdUrl]);
 
   return (
     <ApiContext.Provider
@@ -139,7 +195,10 @@ useEffect(() => {
         access_token,
         artistId, 
         setArtistId, 
-        artistAlbums
+        artistAlbums,
+        setArtistAlbums,
+        topTracks,
+        setTopTracks
       }}>
       {children}
     </ApiContext.Provider>
