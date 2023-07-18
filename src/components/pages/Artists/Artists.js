@@ -1,11 +1,16 @@
 import './Artists.css';
 import Searcher from '../Searcher/Searcher';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ApiContext } from '../../../services/Api';
 
 const Artists = () => {
-  const { apiResponse, search } = useContext(ApiContext);
+  const { apiResponse, search , setEndpoint, search_URL} = useContext(ApiContext);
   //console.log(apiResponse); 
+
+  useEffect(() => {
+    setEndpoint(search_URL)
+        
+  }, [search_URL ]);
 
   //prueba para filtrar los artistas
   const filteredArtists = apiResponse?.artists?.items?.filter((artist) => artist.name.toLowerCase().includes(search.toLowerCase()));
@@ -15,7 +20,8 @@ const Artists = () => {
     return (
       <div className='artists'>
         <h1>Lista de artistas</h1>
-        <Searcher />
+        <h1>BUSCA TU ARTISTA PREFERIDO</h1>
+        <Searcher type={"artist"}/>
         <div className='artists-div'>
           {filteredArtists?.map((artist) => {
             return (

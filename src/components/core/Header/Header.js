@@ -17,6 +17,9 @@ const Header = () => {
         <li>
           <Link to="/artists">Artists</Link>
         </li>
+        <li>
+          <Link to="/playlist">Playlist</Link>
+        </li>
       </ul>
     </div>
   );

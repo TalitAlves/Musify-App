@@ -12,11 +12,15 @@ export const ApiContextProvider = ({ children }) => {
  
   const search_URL = `https://api.spotify.com/v1/search?q=${search}&type=${type}`
   const profile_URL = `https://api.spotify.com/v1/me`
+  const access_token = window.localStorage.access_token
+  
 
   const [endpoint, setEndpoint] = useState("")
  
   useEffect(() => {
-    setEndpoint(search_URL); //se puede atualizar que endpoint llamar
+    setEndpoint(search_URL);
+    
+    
   }, [search_URL]);
   
    
@@ -47,7 +51,7 @@ export const ApiContextProvider = ({ children }) => {
 
 
   return (
-    <ApiContext.Provider value={{ apiResponse, search, setSearch, type, setType, endpoint, setEndpoint,search_URL, profile_URL }}>
+    <ApiContext.Provider value={{ apiResponse, search, setSearch, type, setType, endpoint, setEndpoint,search_URL, profile_URL, access_token }}>
     {children}
     </ApiContext.Provider>
   );
