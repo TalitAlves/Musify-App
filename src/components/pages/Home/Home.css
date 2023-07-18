@@ -1,0 +1,27 @@
+.home{
+    background-color: black;
+    color: white;
+}
+
+.home-title{
+    text-align: center;
+}
+
+.tracks-container{
+    display: flex;
+    flex-direction: row;
+    overflow-y: hidden;
+}
+
+.track-album-image{
+    width: 200px;
+    height: 200px;
+}
+
+.track-album-div{
+    margin: 0px 15px 0px 15px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
