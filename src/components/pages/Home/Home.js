@@ -8,6 +8,7 @@ const Home = () => {
   const { trackApiResponse } = useContext(ApiContext);
   //  console.log(trackApiResponse);
 
+  // si recibo respuesta de la API entonces renderízame esto
   if (trackApiResponse && trackApiResponse.tracks && trackApiResponse.tracks.items) {
     return (
       <div className='home'>

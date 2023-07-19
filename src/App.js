@@ -26,7 +26,7 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/track/track:id" element={<TrackDetail />}/>
+              <Route path="/track/:trackId" element={<TrackDetail />}/>
               <Route path="/login" element={<Login />} />
               <Route path="/list" element={<List />} />
               <Route path="/artists" element={<Artists />} />
