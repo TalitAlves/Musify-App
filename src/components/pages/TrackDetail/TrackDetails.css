@@ -1,0 +1,28 @@
+.track-details-container{
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.track-details-title{
+    padding-top: 30px;
+    letter-spacing: 2px;
+}
+
+.track-details-img{
+    width: 400px;
+    border: rgba(255, 235, 205, 0.888) 2px solid;
+    border-radius: 100px 0px 100px 0px;
+}
+
+.track-details-img:hover{
+    border-radius: 100px 100px 100px 100px;
+    border: white 2px solid;
+}
+
+.track-details-track{
+    text-shadow: aquamarine;
+    text-shadow: rgba(82, 133, 6, 0.63) 2px 5px;
+}

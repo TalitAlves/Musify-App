@@ -9,6 +9,8 @@ import List from "./components/pages/List/List";
 import Artists from "./components/pages/Artists/Artists";
 import Footer from "./components/core/Footer/Footer";
 import Details from "./components/pages/ArtistDetails/Details";
+import TrackDetail from "./components/pages/TrackDetail/TrackDetail";
+import SavedTracks from "./components/pages/SavedTracks/SavedTracks";
 import Playlists from "./components/pages/Playlist/Playlists";
 
 
@@ -25,12 +27,13 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/track/:trackId" element={<TrackDetail />}/>
               <Route path="/login" element={<Login />} />
               <Route path="/list" element={<List />} />
               <Route path="/artists" element={<Artists />} />
               <Route path="/playlists" element={<Playlists />} />
               <Route path="/artists/:id" element={<Details />} />
-
+              <Route path="/savedtracks" element={<SavedTracks />} />
 
 
             </Routes>
