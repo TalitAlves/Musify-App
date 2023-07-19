@@ -19,6 +19,7 @@ function App() {
   const [ token, setToken ] = useState(window.localStorage.access_token ? window.localStorage.access_token : null);
   const [ refresh, setRefresh ] = useState(window.localStorage.refresh_token ? window.localStorage.refresh_token : null);
 
+
   return (
     <>
       <RefreshTokenContext.Provider value={{ refresh, setRefresh }}>
@@ -27,7 +28,7 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/track/:trackId" element={<TrackDetail />}/>
+              <Route path="/track/:trackId" element={<TrackDetail />} />
               <Route path="/login" element={<Login />} />
               <Route path="/list" element={<List />} />
               <Route path="/artists" element={<Artists />} />
