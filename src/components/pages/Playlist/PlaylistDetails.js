@@ -75,7 +75,7 @@ function PlaylistDetails({ selectedPlaylist }) {
       const response = await axios.delete(url, {
         headers: {
           Authorization: "Bearer " + access_token,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json" 
         },
         data: requestBody
       });
