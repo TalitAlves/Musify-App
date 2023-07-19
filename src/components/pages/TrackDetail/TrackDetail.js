@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import './TrackDetails.css';
 
 const TrackDetail = () => {
@@ -49,7 +50,8 @@ const TrackDetail = () => {
             <p>Popularidad de la canción según nuestros usuarios: {trackDetails.popularity}</p>
             <p>Tipo: {trackDetails.album.album_type} {trackDetails.type}</p>
             <p>Nombre del álbum: {trackDetails.album.name}</p>
-            <p>Tipo: {trackDetails.artists[ 0 ].type}</p>
+            <p>Tipo: <Link to="/artists"> {trackDetails.artists[ 0 ].type}</Link> 
+            </p>
             <p>duración en milisegundos: {trackDetails.duration_ms} ms</p>
             <p>Mercados en los que está disponible actualmente: {trackDetails.album.available_markets.join(", ")}</p>
         </div>
