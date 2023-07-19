@@ -9,6 +9,8 @@ function PlaylistDetails({ selectedPlaylist }) {
   const [newSong, setNewSong] = useState("");
   const { access_token } = useContext(ApiContext);
   const id = selectedPlaylist.id;
+  console.log(selectedPlaylist)
+  console.log( selectedPlaylist.snapshot_id)
 
 
   //1. llamada a la api con el id de la playlist recebido pro props
@@ -54,38 +56,48 @@ function PlaylistDetails({ selectedPlaylist }) {
     }
   };
 
-  const removeSelectedSong = async (track) => {
+  //3. llamada a api para quitar la cancion
+  const removeSelectedSong = async ( track ) => {
     const url = `https://api.spotify.com/v1/playlists/${id}/tracks`;
+    console.log(selectedPlaylist)
+  
     const requestBody = {
-      tracks: [
-        {uri: track.uri}
+      "tracks": [
+        {
+          "uri": `${track.track.uri}`
+        }
       ],
-      snapshot_id: track.snapshot_id
+      "snapshot_id":`${selectedPlaylist.snapshot_id}`
+     
     };
-
+  
     try {
-       await axios.post(url, requestBody, {
+      const response = await axios.delete(url, {
         headers: {
           Authorization: "Bearer " + access_token,
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
+        data: requestBody
       });
-
-      setPlaylist(playlist);
+  
+      console.log("Song removed successfully:", response.data);
+      console.log(track.uri)
     } catch (error) {
-      console.error("Erro to add newSong:", error);
+      console.error("Error removing song:", error);
     }
   };
 
+  //4. funcion para actulizar la playlist despues de quitar la cancion
   const handleRemoveSong = async (track) => {
     await removeSelectedSong(track);
-    // Atualize a playlist após a remoção da música
-    const updatedPlaylist = { ...playlist };
+       const updatedPlaylist = { ...playlist };
     updatedPlaylist.tracks.items = updatedPlaylist.tracks.items.filter(
       (item) => item.track.id !== track.track.id
     );
     setPlaylist(updatedPlaylist);
   };
+
+
 
   const handleUpdateSong = (song) => {
     const updatedPlaylist = { ...playlist };
@@ -124,6 +136,7 @@ function PlaylistDetails({ selectedPlaylist }) {
                             src={track.track.album.images[0].url}
                             alt="cover album"
                           />
+                          
                         ) : (
                           <span className="material-symbols-outlined">
                             music_note

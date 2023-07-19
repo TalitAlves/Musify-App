@@ -164,6 +164,12 @@ padding: 10px;
     list-style-type: none;
     padding: 0;
   }
+
+  .list-img{
+    height: 48px;
+    width: 48px;
+    margin-right: 16px;
+  }
   
   .song-list-item {
     display: flex;
@@ -171,16 +177,28 @@ padding: 10px;
     margin-bottom: 10px;
   }
   
-  .song-list-btn {
+  .song-name {
+    flex: 1;
     margin-right: 10px;
   }
   
-  .song-name {
+  .song-artist {
     flex: 1;
-    margin: 0;
+    margin-right: 10px;
   }
-
-   
+  
+  .song-list-btn {
+    margin-right: 10px;
+    color: black;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .song-list-btn:hover {
+    background-color: #282828
+  }
   .track-item {
     display: flex;
     align-items: center;
@@ -189,6 +207,11 @@ padding: 10px;
   
   .remove-btn {
     margin-right: 10px;
+    padding: 8px 16px;
+    border:none
+  }
+  .remove-btn:hover {
+    background-color: #282828
   }
   
   .index {
