@@ -78,7 +78,7 @@ export const ApiContextProvider = ({ children }) => {
 
         setTrackApiResponse(data);
       } catch (error) {
-        console.log("intento de API call fallido")
+        console.log("intento de API call fallido",error);
       }
     }
 
@@ -176,6 +176,39 @@ useEffect(() => {
     fetchTopTracks();
   }, [artistId, ArtistsIdUrl]);
 
+  // petición Api para obtener las recomendaciones de varias canciones
+  const [recApiResponse, setRecApiResponse] = useState([]);
+  const rec_URL = "https://api.spotify.com/v1/recommendations?limit=20&seed_genres=rock%2Cindie%2Calternative%2Cpop%2Cfolk";
+  const [recEndpoint, setRecEndpoint] = useState("");
+
+  useEffect(() => {
+    setRecEndpoint(rec_URL);
+  }, [rec_URL])
+
+  useEffect(() => {
+    const fetchRecData = async () => {
+      try {
+        let authParams = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.access_token,
+          },
+        };
+
+        const response = await fetch(recEndpoint, authParams);
+        const data = await response.json();
+
+        setRecApiResponse(data);
+        console.log("recommendations API response", data);
+      } catch (error) {
+        console.log("ERROR en API RESPONSE", error);
+      }
+    }
+    fetchRecData();
+  }, [recEndpoint]);
+
+
   return (
     <ApiContext.Provider
       value={{
@@ -198,7 +231,11 @@ useEffect(() => {
         artistAlbums,
         setArtistAlbums,
         topTracks,
-        setTopTracks
+        setTopTracks,
+        recApiResponse,
+        recEndpoint,
+        setRecEndpoint,
+        rec_URL,
       }}>
       {children}
     </ApiContext.Provider>

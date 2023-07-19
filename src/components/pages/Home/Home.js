@@ -27,7 +27,7 @@ const Home = () => {
         <h1 className='home-title'>BIENVENIDO A LA HOME</h1>
         <h1 className='home-tracks-title'>Top popular songs</h1>
         <div className='btn-div'>
-          {/* botón mostrar más o menos */}
+          {/* botones para mostrar más o menos elementos */}
           {visibleTracks < allTracks.length && (
             <button onClick={handleShowMore}>Mostrar más <IoMdArrowDropdown className='icon' /></button>
           )}
@@ -60,7 +60,7 @@ const Home = () => {
             </div>
           ))}
         </div>
-
+        {/* en saved tracks están las canciones realmente favoritas en nuestro Spotify compartido */}
         <SavedTracks />
       </div>
     );
