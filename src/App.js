@@ -8,9 +8,9 @@ import { RefreshTokenContext } from "./context/refreshTokenContext";
 import List from "./components/pages/List/List";
 import Artists from "./components/pages/Artists/Artists";
 import Footer from "./components/core/Footer/Footer";
-import Playlist from "./components/pages/Playlist/Playlist"
-import PlaylistCreator from "./components/pages/Playlist/PlaylistCreator";
 import Details from "./components/pages/ArtistDetails/Details";
+import Playlists from "./components/pages/Playlist/Playlists";
+
 
 function App() {
 
@@ -28,8 +28,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/list" element={<List />} />
               <Route path="/artists" element={<Artists />} />
-              <Route path="/playlist" element={<PlaylistCreator />} />
-              <Route path="/playlist/:id" element={<Playlist />} />
+              <Route path="/playlists" element={<Playlists />} />
               <Route path="/artists/:id" element={<Details />} />
 
 
