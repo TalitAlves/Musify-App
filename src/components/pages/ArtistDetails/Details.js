@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { ApiContext } from "../../../services/Api";
+import "./ArtistDetails.css";
 
 const Details = () => {
   const { apiResponse, artistAlbums, topTracks } = useContext(ApiContext);
+  console.log(apiResponse);
 
   const { id } = useParams();
 
@@ -13,35 +15,54 @@ const Details = () => {
 
   if (artistDetails) {
     return (
-      <div>
-        <h2>{artistDetails.name}</h2>
-        {artistDetails.images && artistDetails.images.length > 0 && (
-          <img src={artistDetails.images[0].url} alt={artistDetails.name} />
-        )}
-        {artistDetails.genres && <p>{artistDetails.genres.join(", ")}</p>}
+      <div className="center">
+        <div className="artist-primary-container">
+          <div className="img-container-artist">
+            {artistDetails.images && artistDetails.images.length > 0 && (
+              <img src={artistDetails.images[0].url} alt={artistDetails.name} />
+            )}
+          </div>
+          <div className="artist-container">
+            <h2 className="name-artist">{artistDetails.name}</h2>
+            {artistDetails.genres && (
+              <p className="genres-container">{artistDetails.genres[0]}</p>
+            )}
 
-        <h3>Top Tracks:</h3>
-        <ul>
-          {topTracks.slice(0, 6).map((track, index) => (
-            <li key={track.id}>
-              <p>{`${index + 1}. ${track.name}`}</p>
-              <div>
-                <p> {track.album.name}</p>
-                <p> {msToTime(track.duration_ms)}</p>
+            <ul className="tracks-artist-container">
+              {topTracks.slice(0, 6).map((track, index) => (
+                <li className="li-container-tracks" key={track.id}>
+                  <div className="id-tracks">
+                    <p>{`0${index + 1} `}</p>
+                  </div>
+                  <div className="tracks-data">
+                    <p className="name-class">{` ${track.name}`}</p>
+                    <div className="album-times-container">
+                      <p className="name-tracks"> {track.album.name}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <h3 className="albums-title">Álbumes</h3>
+        <div className="container-albums-artist-data">
+          {artistAlbums &&
+            artistAlbums.map((album) => (
+              <div className="albums-artists-conainer" key={album.id}>
+                <img
+                  className="img-album-artist"
+                  src={album.images[0].url}
+                  alt={album.name}
+                />
+                <div className="data-album-container">
+                  <p className="album-name">{album.name}</p>
+                  <p className="album-tracks-number"> {album.total_tracks} Tracks</p>
+                </div>
               </div>
-            </li>
-          ))}
-        </ul>
-
-        <h3>Álbumes:</h3>
-        {artistAlbums &&
-          artistAlbums.map((album) => (
-            <div key={album.id}>
-              <img src={album.images[0].url} alt={album.name} />
-              <p>{album.name}</p>
-              <p>Número de canciones: {album.total_tracks}</p>
-            </div>
-          ))}
+            ))}
+        </div>
       </div>
     );
   }
@@ -51,7 +72,6 @@ const Details = () => {
 
 export default Details;
 
-// Función auxiliar para convertir milisegundos a formato de tiempo (mm:ss)
 function msToTime(duration) {
   const minutes = Math.floor(duration / 60000);
   const seconds = ((duration % 60000) / 1000).toFixed(0);

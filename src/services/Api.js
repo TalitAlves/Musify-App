@@ -129,7 +129,7 @@ useEffect(() => {
           },
         };
 
-        const albumsResponse = await fetch(`${ArtistsIdUrl}/${artistId}/albums?limit=50`, authParams);
+        const albumsResponse = await fetch(`${ArtistsIdUrl}/${artistId}/albums?market=ES&limit=50`, authParams);
         const albumsData = await albumsResponse.json();
 
         setArtistAlbums(albumsData.items);
