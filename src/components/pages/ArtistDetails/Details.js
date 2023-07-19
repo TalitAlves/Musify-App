@@ -58,7 +58,7 @@ const Details = () => {
                 />
                 <div className="data-album-container">
                   <p className="album-name">{album.name}</p>
-                  <p className="album-tracks-number"> {album.total_tracks} Tracks</p>
+                  <p className="album-tracks-number"> {album.total_tracks} Songs</p>
                 </div>
               </div>
             ))}
