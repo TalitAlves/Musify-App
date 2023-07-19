@@ -4,13 +4,11 @@ export const ApiContext = createContext();
 ApiContext.displayName = "ApiContext";
 
 export const ApiContextProvider = ({ children }) => {
-
-  const [ apiResponse, setApiResponse ] = useState([]);
-  const [ type, setType ] = useState("artist");
-  const [ artistId, setArtistId ] = useState("");
-  const [ artistAlbums, setArtistAlbums ] = useState([]);
+  const [apiResponse, setApiResponse] = useState([]);
   const [search, setSearch] = useState("the beatles");
+  const [type, setType] = useState("artist");
  
+
 
   const search_URL = `https://api.spotify.com/v1/search?q=${search}&type=${type}`;
   const profile_URL = `https://api.spotify.com/v1/me`;
@@ -18,11 +16,11 @@ export const ApiContextProvider = ({ children }) => {
   const access_token = window.localStorage.access_token
 
 
-  const [ endpoint, setEndpoint ] = useState("");
+  const [endpoint, setEndpoint] = useState("");
 
   useEffect(() => {
     setEndpoint(search_URL);
-  }, [ search_URL ]);
+  }, [search_URL]);
 
   useEffect(() => {
     const fetchTrackData = async () => {
@@ -41,7 +39,7 @@ export const ApiContextProvider = ({ children }) => {
         setApiResponse(data);
 
         if (data && data.artists && data.artists.items.length > 0) {
-          const artistId = data.artists.items[ 0 ].id;
+          const artistId = data.artists.items[0].id; 
           setArtistId(artistId);
         }
       } catch (error) {
@@ -53,7 +51,7 @@ export const ApiContextProvider = ({ children }) => {
   }, [ endpoint ]);
 
 
-  // petición API para obtener canciones (tracks) para la Home
+  // petición API para obtener canciones para la Home
   const [ trackApiResponse, setTrackApiResponse ] = useState([]);
 
   const track_URL = "https://api.spotify.com/v1/search?q=album&type=track&limit=20"; // URL con q= album | type=track | limit=20 tracks
@@ -80,44 +78,12 @@ export const ApiContextProvider = ({ children }) => {
 
         setTrackApiResponse(data);
       } catch (error) {
-        console.log("intento de API call fallido", error)
+        console.log("intento de API call fallido")
       }
     }
 
     fetchData();
   }, [ trackEndpoint ]);
-
-
-  useEffect(() => {
-    const fetchArtistDetails = async () => {
-      try {
-        if (artistId) {
-          let authParams = {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + window.localStorage.access_token,
-            },
-          };
-
-          const response = await fetch(`${ArtistsIdUrl}/${artistId}`, authParams);
-          const data = await response.json();
-
-          console.log("Detalles del artista seleccionado:", data);
-
-          const albumsResponse = await fetch(`${albums_URL}`, authParams);
-          const albumsData = await albumsResponse.json();
-
-          setArtistAlbums(albumsData.items);
-          console.log("Álbumes del artista:", albumsData.items);
-        }
-      } catch (error) {
-        console.log("Error al obtener detalles del artista:", error);
-      }
-    };
-
-    fetchArtistDetails();
-  }, [ artistId, ArtistsIdUrl ]);
 
 // petición API para obtener canciones para la details
 const [artistId, setArtistId] = useState(""); 
@@ -138,6 +104,9 @@ useEffect(() => {
 
         const response = await fetch(`${ArtistsIdUrl}/${artistId}`, authParams);
         const data = await response.json();
+
+ 
+
        
       }
     } catch (error) {
@@ -163,7 +132,9 @@ useEffect(() => {
         const albumsResponse = await fetch(`${ArtistsIdUrl}/${artistId}/albums?market=ES&limit=50`, authParams);
         const albumsData = await albumsResponse.json();
 
-
+        setArtistAlbums(albumsData.items);
+        console.log("Álbumes del artista:", albumsData.items);
+      }
     } catch (error) {
       console.log("Error al obtener los álbumes del artista:", error);
     }
@@ -172,9 +143,10 @@ useEffect(() => {
   fetchAlbums();
 }, [artistId, ArtistsIdUrl]);
 
-
   // petición API para obtener los top tracks del artista
   const [topTracks, setTopTracks] = useState([]);
+
+
 
   useEffect(() => {
     const fetchTopTracks = async () => {
@@ -221,8 +193,8 @@ useEffect(() => {
         trackEndpoint,
         setTrackEndpoint,
         access_token,
-        artistId,
-        setArtistId,
+        artistId, 
+        setArtistId, 
         artistAlbums,
         setArtistAlbums,
         topTracks,
@@ -232,3 +204,4 @@ useEffect(() => {
     </ApiContext.Provider>
   );
 };
+ 
