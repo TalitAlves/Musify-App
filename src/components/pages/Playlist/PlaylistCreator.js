@@ -1,50 +1,27 @@
 import React, { useState, useContext, useEffect } from "react";
 import { ApiContext } from "../../../services/Api";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import "./Playlist.css";
 
-function PlaylistCreator() {
+function PlaylistCreator({ onPlaylistCreated }) {
   const [inputValue, setInputValue] = useState("");
-  const [links, setLinks] = useState([]);
   const [createdPlaylist, setCreatedPlaylist] = useState(null);
-  const { apiResponse, setEndpoint, profile_URL, access_token } =
-    useContext(ApiContext);
+  const { apiResponse, setEndpoint, profile_URL, access_token } =  useContext(ApiContext);
+  const user_id = apiResponse.id;
+  
 
   useEffect(() => {
     setEndpoint(profile_URL); //se puede atualizar que endpoint llamar
   }, [profile_URL]);
 
-  useEffect(() => {
-    const storedLinks = localStorage.getItem("playlistLinks");
-    if (storedLinks) {
-      setLinks(JSON.parse(storedLinks));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("playlistLinks", JSON.stringify(links));
-  }, [links]);
-
+  //1.Guarda los dados del input para pasar a la funcioncion createPlaylisr
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  const addPlayList = (event) => {
-    event.preventDefault();
-    const playlistName = inputValue;
+ 
 
-    setLinks((prevLinks) => [
-      ...prevLinks,
-      {
-        name: playlistName,
-        link: playlistName.toLocaleLowerCase().replace(`//g, '_'`),
-      },
-    ]);
-    setInputValue("");
-  };
-
-  const user_id = apiResponse.id;
-
+//2. llamada a api para crear un nueva playlist
   const createPlaylist = async () => {
     const url = `https://api.spotify.com/v1/users/${user_id}/playlists`;
     const requestBody = {
@@ -61,41 +38,35 @@ function PlaylistCreator() {
         },
         
       });
-      setCreatedPlaylist(response.data);
-      console.log(response.data);
+      setCreatedPlaylist(response.data); //crea la playlist
+      setInputValue("");                 //deja el input in black despues del submit 
+      onPlaylistCreated(createdPlaylist);  //actuliza la lista de playlist del compoente Playlist
+     
+     
     } catch (error) {
       console.error("Erro ao criar a playlist:", error);
     }
   };
 
+  
+
   return (
     <>
-      <form onSubmit={addPlayList}>
-        <div className="title">New Playlist</div>
+      <form className="playlist-creator-form">
+        <label className="title">New Playlist</label>
         <input
           type="text"
           placeholder="Playlist name"
           required
           onChange={handleInputChange}
         />
-        <button type="submit" onClick={createPlaylist}>
-          Creat
+        <button type="submit" onClick={createPlaylist} >
+          Create
         </button>
       </form>
 
-      {links.map((link, index) => (
-        <div key={index}>
-        
-        </div>
-      ))}
-
-      {createdPlaylist && (
-        <div>
-          <h2>Playlist created!</h2>
-          <p>Name: {createdPlaylist.name}</p>
-          <p>Description: {createdPlaylist.description}</p>
-        </div>
-      )}
+     
+     
     </>
   );
 }
