@@ -6,7 +6,6 @@ import './Artists.css'
 
 const Artists = () => {
   const { apiResponse, search } = useContext(ApiContext);
-  // Prueba para filtrar los artistas
   const filteredArtists = apiResponse?.artists?.items?.filter((artist) =>
     artist.name.toLowerCase().includes(search.toLowerCase())
   );
