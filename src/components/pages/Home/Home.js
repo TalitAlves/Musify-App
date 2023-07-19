@@ -3,6 +3,7 @@ import React from'react';
 import { useContext } from 'react';
 import { ApiContext } from '../../../services/Api';
 import { Link } from 'react-router-dom';
+import SavedTracks from '../SavedTracks/SavedTracks';
 
 const Home = () => {
   const { trackApiResponse } = useContext(ApiContext);
@@ -40,6 +41,7 @@ const Home = () => {
           ))}
         </div>
 
+        <SavedTracks />
       </div>
     );
   }
