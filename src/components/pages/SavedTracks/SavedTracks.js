@@ -1,12 +1,14 @@
 import './SavedTracks.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
+import { ApiContext } from '../../../services/Api';
 
 const SavedTracks = () => {
   const [savedTracks, setSavedTracks] = useState([]);
   const [visibleTracks, setVisibleTracks] = useState(5);
   const [totalSavedTracks, setTotalSavedTracks] = useState(0);
+  const { access_token } = useContext(ApiContext)
 
   useEffect(() => {
     const fetchSavedTracks = async () => {
@@ -14,7 +16,7 @@ const SavedTracks = () => {
         const response = await fetch('https://api.spotify.com/v1/me/tracks', {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + window.localStorage.access_token,
+            'Authorization': 'Bearer ' + access_token,
           },
         });
         const data = await response.json();
@@ -28,7 +30,7 @@ const SavedTracks = () => {
       }
     };
     fetchSavedTracks();
-  }, []);
+  }, [access_token]);
 
   const handleShowMore = () => {
     setVisibleTracks(totalSavedTracks);
@@ -58,7 +60,7 @@ const SavedTracks = () => {
       </div>
 
       <div className='saved-tracks-container'>
-        {savedTracks.slice(0, visibleTracks).map((track) => (
+        {savedTracks?.slice(0, visibleTracks).map((track) => (
           <div className='saved-track-card' key={track.track.id}>
             <h3 className='saved-trackname'>{track.track.name}</h3>
             <img

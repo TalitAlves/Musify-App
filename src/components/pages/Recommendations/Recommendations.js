@@ -20,7 +20,7 @@ const Recommendations = () => {
 
       <div className='rec-tracks-container'>
       <div className='rec-tracks-card'>
-          {tracks.map((track) => (
+          {tracks?.map((track) => (
             <div key={track.id}> 
               <h3>{track.name}</h3>
               <img src={track.album.images[0].url} alt={track.name} />
