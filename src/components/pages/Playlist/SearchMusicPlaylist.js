@@ -6,7 +6,7 @@ function SearchMusicPlaylist({ handleSongSelected, handleUpdateSong }) {
   const { apiResponse, setEndpoint, search } = useContext(ApiContext);
   const search_URL = `https://api.spotify.com/v1/search?q=${search}&type=track`;
   const [track, setTrack] = useState("");
-  console.log(track);
+
 
   //1. endpoint para hacer la busqueda de las canciones
   useEffect(() => {
@@ -23,7 +23,7 @@ function SearchMusicPlaylist({ handleSongSelected, handleUpdateSong }) {
     setTrack(track);
     handleSongSelected(track);
     handleUpdateSong(track);
-    console.log(track);
+  
   };
 
   if (apiResponse && apiResponse.tracks && apiResponse.tracks.items) {

@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ApiContext } from "../../../services/Api";
 import Searcher from "../Searcher/Searcher";
-import './GeneralSearch.css'
+import "./GeneralSearch.css";
 
 function GeneralSearch() {
   const { apiResponse, setEndpoint, search } = useContext(ApiContext);
   const search_URL = `https://api.spotify.com/v1/search?q=${search}&type=track,album,artist&limit=30`;
-  
 
   //1. endpoint para hacer la busqueda de las canciones
   useEffect(() => {
@@ -26,40 +25,38 @@ function GeneralSearch() {
     track.name.toLowerCase().includes(search.toLowerCase())
   );
 
-   if (apiResponse) {
-    console.log(filteredSong);
-    
-
+  if (apiResponse) {
     return (
       <>
-        <div className="searchGeneral">          
-         
+        <div className="searchGeneral">
           <ul className="search-list-container">
-          <Searcher type={"track,album,artist"} />
+            <Searcher type={"track,album,artist"} />
             {filteredSong
               ? filteredSong?.map((song) => {
                   return (
                     <>
-                    <li key={song.id} className="search-list-item">
-                      {song?.album?.images[0]?.url ? 
-                      <img
-                          src={song?.album?.images[0]?.url}
-                          alt="song cover"
-                          className="search-list-img"
-                        /> : <span className="material-symbols-outlined">music_note</span>}
+                      <li key={song.id} className="search-list-item">
+                        {song?.album?.images[0]?.url ? (
+                          <img
+                            src={song?.album?.images[0]?.url}
+                            alt="song cover"
+                            className="search-list-img"
+                          />
+                        ) : (
+                          <span className="material-symbols-outlined">
+                            music_note
+                          </span>
+                        )}
                         <div className="track-info">
-                        <div className="track-name">{song.name}</div>
+                          <div className="track-name">{song.name}</div>
 
-                        <div className="track-artist">
-                          {song.artists.map((artist) => {
-                            return <span key={artist.id}>{artist.name}</span>;
-                          })}
+                          <div className="track-artist">
+                            {song.artists.map((artist) => {
+                              return <span key={artist.id}>{artist.name}</span>;
+                            })}
+                          </div>
                         </div>
-                        </div>
-                        <div className="search-type">
-                          {song.type}
-                        </div>
-                        
+                        <div className="search-type">{song.type}</div>
                       </li>
                     </>
                   );
@@ -77,18 +74,15 @@ function GeneralSearch() {
                           className="search-list-img"
                         />
                         <div className="search-album-info">
-                        <div className="search-album-name">{album.name}</div>
+                          <div className="search-album-name">{album.name}</div>
 
-                        <div className="search-artist">
-                          {album.artists.map((artist) => {
-                            return <span key={artist.id}>{artist.name}</span>;
-                          })}
+                          <div className="search-artist">
+                            {album.artists.map((artist) => {
+                              return <span key={artist.id}>{artist.name}</span>;
+                            })}
+                          </div>
                         </div>
-                        </div>
-                        <div className="search-type">
-                          {album.type}
-                        </div>
-                        
+                        <div className="search-type">{album.type}</div>
                       </li>
                     </>
                   );
@@ -98,19 +92,20 @@ function GeneralSearch() {
               ? filteredArtist?.map((artist) => {
                   return (
                     <>
-                    
                       <li key={artist.id} className="search-list-item">
-                      {artist?.images[0]?.url ? 
-                      <img
-                          src={artist?.images[0]?.url}
-                          alt="artist cover"
-                          className="search-list-img"
-                        /> : <span className="material-symbols-outlined">music_note</span>}
+                        {artist?.images[0]?.url ? (
+                          <img
+                            src={artist?.images[0]?.url}
+                            alt="artist cover"
+                            className="search-list-img"
+                          />
+                        ) : (
+                          <span className="material-symbols-outlined">
+                            music_note
+                          </span>
+                        )}
                         <div className="search-artist-name">{artist.name}</div>
                         <div className="search-type">{artist.type}</div>
-
-
-                       
                       </li>
                     </>
                   );

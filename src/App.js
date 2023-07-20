@@ -13,12 +13,16 @@ import TrackDetail from "./components/pages/TrackDetail/TrackDetail";
 import SavedTracks from "./components/pages/SavedTracks/SavedTracks";
 import Playlists from "./components/pages/Playlist/Playlists";
 import GeneralSearch from "./components/pages/Searcher/GeneralSearch";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-
-  const [ token, setToken ] = useState(window.localStorage.access_token ? window.localStorage.access_token : null);
-  const [ refresh, setRefresh ] = useState(window.localStorage.refresh_token ? window.localStorage.refresh_token : null);
+  const [token, setToken] = useState(
+    window.localStorage.access_token ? window.localStorage.access_token : null
+  );
+  const [refresh, setRefresh] = useState(
+    window.localStorage.refresh_token ? window.localStorage.refresh_token : null
+  );
 
   return (
     <>
@@ -28,7 +32,7 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/track/:trackId" element={<TrackDetail />}/>
+              <Route path="/track/:trackId" element={<TrackDetail />} />
               <Route path="/login" element={<Login />} />
               <Route path="/list" element={<List />} />
               <Route path="/artists" element={<Artists />} />
@@ -36,10 +40,8 @@ function App() {
               <Route path="/artists/:id" element={<Details />} />
               <Route path="/savedtracks" element={<SavedTracks />} />
               <Route path="/search" element={<GeneralSearch />} />
-
-
-
             </Routes>
+
             <Footer />
           </BrowserRouter>
         </TokenContext.Provider>
