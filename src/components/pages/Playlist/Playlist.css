@@ -9,6 +9,10 @@
     background-color: #000000
 
 }
+
+.generalSearch-link {
+  color: white;
+}
 .playlist-names{
     flex-grow: 0;
     flex-basis: 10%;
