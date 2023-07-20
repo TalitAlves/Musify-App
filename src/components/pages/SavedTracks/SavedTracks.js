@@ -45,7 +45,7 @@ const SavedTracks = () => {
       <h1 className='savedtracks-title'>
         Saved Tracks <AiOutlineHeart className='icon-heart' />
       </h1>
-      <div className='btn-div'>
+      <div className='btn-saved-div'>
         {visibleTracks < totalSavedTracks && (
           <button onClick={handleShowMore}>
             Mostrar más <IoMdArrowDropdown />

@@ -37,3 +37,12 @@
 .icon-heart{
     height: 25px;
 }
+
+.btn-saved-div button{
+    background-color: rgb(186, 31, 233);
+    color: black;
+    margin: 0px 0px 20px 70px;
+    border-radius: 20px;
+    border: none;
+    padding: 5px 15px;
+}
