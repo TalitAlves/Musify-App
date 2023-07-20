@@ -5,6 +5,7 @@ import { ApiContext } from '../../../services/Api';
 import { Link } from 'react-router-dom';
 import SavedTracks from '../SavedTracks/SavedTracks';
 import { IoMdArrowDropdown, IoMdArrowDropup } from'react-icons/io';
+import Recommendations from '../Recommendations/Recommendations';
 
 const Home = () => {
   const { trackApiResponse } = useContext(ApiContext);
@@ -60,8 +61,8 @@ const Home = () => {
             </div>
           ))}
         </div>
-        {/* en saved tracks están las canciones realmente favoritas en nuestro Spotify compartido */}
         <SavedTracks />
+        <Recommendations />
       </div>
     );
   }

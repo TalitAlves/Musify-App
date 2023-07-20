@@ -41,18 +41,18 @@ const SavedTracks = () => {
   return (
     <div>
       <h1 className='savedtracks-title'>
-        Saved Tracks <AiOutlineHeart />
+        Saved Tracks <AiOutlineHeart className='icon-heart' />
       </h1>
       <div className='btn-div'>
         {visibleTracks < totalSavedTracks && (
           <button onClick={handleShowMore}>
-            Mostrar más <IoMdArrowDropdown className='icon' />
+            Mostrar más <IoMdArrowDropdown />
           </button>
         )}
 
         {visibleTracks > 5 && (
           <button onClick={handleShowLess}>
-            Mostrar menos <IoMdArrowDropup className='icon' />
+            Mostrar menos <IoMdArrowDropup />
           </button>
         )}
       </div>
