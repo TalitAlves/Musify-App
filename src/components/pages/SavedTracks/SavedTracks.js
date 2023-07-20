@@ -32,6 +32,15 @@ const SavedTracks = () => {
     fetchSavedTracks();
   }, [access_token]);
 
+  //aquí guardamos la uri de cada canción de las Liked Songs
+  const trackUris = savedTracks.map((track) => track.track.uri);
+  console.log(trackUris);
+
+  //aquí guardamos el id de cada canción 
+  const trackIds = savedTracks.map((track) => track.track.id);
+  console.log(trackIds);
+
+
   const handleShowMore = () => {
     setVisibleTracks(totalSavedTracks);
   };

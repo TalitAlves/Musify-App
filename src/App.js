@@ -13,7 +13,6 @@ import TrackDetail from "./components/pages/TrackDetail/TrackDetail";
 import SavedTracks from "./components/pages/SavedTracks/SavedTracks";
 import Playlists from "./components/pages/Playlist/Playlists";
 
-
 function App() {
 
   const [ token, setToken ] = useState(window.localStorage.access_token ? window.localStorage.access_token : null);
