@@ -23,6 +23,7 @@
 .track-details-track{
     text-shadow: aquamarine;
     text-shadow: rgba(82, 133, 6, 0.63) 2px 5px;
+    width: 350px;
 }
 
 .available-markets{
