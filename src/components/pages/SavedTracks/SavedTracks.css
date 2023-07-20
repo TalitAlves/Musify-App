@@ -3,10 +3,6 @@
     letter-spacing: 3px;
 }
 
-.savedtracks-total{
-    text-align: center;
-}
-
 .saved-tracks-container{
     display: flex;
     flex-wrap: wrap;
