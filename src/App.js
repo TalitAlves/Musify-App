@@ -13,8 +13,7 @@ import TrackDetail from "./components/pages/TrackDetail/TrackDetail";
 import SavedTracks from "./components/pages/SavedTracks/SavedTracks";
 import Playlists from "./components/pages/Playlist/Playlists";
 import GeneralSearch from "./components/pages/Searcher/GeneralSearch";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   const [token, setToken] = useState(
