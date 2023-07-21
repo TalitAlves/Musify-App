@@ -1,17 +1,21 @@
-.savedtracks-title{
+.icon-disco{
+    height: 25px;
+}
+
+.recommendations-title{
     text-align: center;
     letter-spacing: 3px;
 }
 
-.saved-tracks-container{
+.rec-tracks-container{
     display: flex;
     flex-wrap: wrap;
-    padding-bottom: 10px;
-    justify-content: center;
+    padding-bottom: 30px;
+    justify-content: center; 
 }
 
-.saved-track-card{
-    border: 2px solid rgba(248, 143, 204, 0.306);
+.rec-track-card{
+    border: 2px solid rgba(143, 210, 248, 0.306);
     border-radius: 30px;
     margin: 0px 15px 30px 15px;
     padding: 0px 10px;
@@ -24,25 +28,24 @@
     cursor: pointer;
 }
 
-.saved-track-img{
+.rec-track-img{
     width: 180px;
     height: 180px;
 }
 
-.saved-track-img:hover{
+.rec-track-img:hover{
     border-radius: 50px;
     border: 2px rgba(255, 255, 255, 0.686) solid;
 }
 
-.icon-heart{
-    height: 25px;
+.genres-ul-title{
+    text-align: center;
+    color: yellowgreen;
 }
 
-.btn-saved-div button{
-    background-color: rgb(186, 31, 233);
-    color: black;
-    margin: 0px 0px 20px 70px;
-    border-radius: 20px;
-    border: none;
-    padding: 5px 15px;
+.genres-ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    color: yellowgreen;
 }

@@ -8,31 +8,61 @@
     padding-top: 50px;
 }
 
-.tracks-container{
+.home-tracks-title{
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.home-tracks-container{
     display: flex;
     flex-wrap: wrap;
-    padding-bottom: 100px;
+    padding-bottom: 10px;
+    justify-content: center;
 }
 
-.track-album-image{
-    width: 200px;
-    height: 200px;
-}
-
-.track-card{
-    border: 2px solid rgba(255, 255, 255, 0.306);
+.home-track-card{
+    border: 2px solid rgba(242, 246, 126, 0.306);
     border-radius: 30px;
     margin: 0px 15px 30px 15px;
     padding: 0px 10px;
-    width: 250px;
+    width: 190px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    cursor: pointer;
+}
+
+.home-track-card:hover{
+    background-color: rgba(255, 255, 255, 0.052);
+}
+
+.home-track-album-image{
+    width: 180px;
+    height: 180px;
+}
+
+.home-track-album-image:hover{
+    border-radius: 50px;
+    border: 2px rgba(255, 255, 255, 0.686) solid;
+    transition-duration: 0.5s;
 }
 
 .track-card:hover{
     border:1px solid rgba(255, 255, 255, 0.866);
+    cursor: pointer;
+}
+
+.btn-div button{
+    background-color: yellowgreen;
+    color: black;
+    margin: 0px 0px 20px 70px;
+    border-radius: 20px;
+    border: none;
+    padding: 5px 15px;
+}
+
+.icon{
     cursor: pointer;
 }

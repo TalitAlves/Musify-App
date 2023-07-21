@@ -4,6 +4,8 @@ import { useContext } from 'react';
 import { ApiContext } from '../../../services/Api';
 import { Link } from 'react-router-dom';
 import SavedTracks from '../SavedTracks/SavedTracks';
+import { IoMdArrowDropdown, IoMdArrowDropup } from'react-icons/io';
+import Recommendations from '../Recommendations/Recommendations';
 
 const Home = () => {
   const { trackApiResponse } = useContext(ApiContext);
@@ -24,42 +26,43 @@ const Home = () => {
     return (
       <div className='home'>
         <h1 className='home-title'>BIENVENIDO A LA HOME</h1>
-
-        <div className='tracks-container'>
-
-          {/* botón mostrar más o menos */}
+        <h1 className='home-tracks-title'>Top popular songs</h1>
+        <div className='btn-div'>
+          {/* botones para mostrar más o menos elementos */}
           {visibleTracks < allTracks.length && (
-            <button onClick={handleShowMore}>más</button>
+            <button onClick={handleShowMore}>Mostrar más <IoMdArrowDropdown className='icon' /></button>
           )}
 
           {visibleTracks > 5 && (
-            <button onClick={handleShowLess}>mostrar menos</button>
+            <button onClick={handleShowLess}>Mostrar menos <IoMdArrowDropup className='icon' /></button>
           )}
+        </div>
+
+        <div className='home-tracks-container'>
 
           {allTracks.slice(0, visibleTracks).map((track) => (
-            <div className='track-card' key={track.id}>
+            <div className='home-track-card' key={track.id}>
 
-              {track.artists && track.artists.length > 0 && (
-                <h3>{track.artists[ 0 ].name}</h3>
-              )}
+            {track.name && <h3>{track.name}</h3>}
 
               {track.album && track.album.images && track.album.images.length > 0 && (
                 <Link to={`/track/${track.id}`}>
                   <img
-                    className='track-album-image'
+                    className='home-track-album-image'
                     src={track.album.images[ 0 ].url}
                     alt={track.album.name}
                   />
                 </Link>
               )}
-
-              {track.name && <p>{track.name}</p>}
+              {track.artists && track.artists.length > 0 && (
+                <h4>{track.artists[ 0 ].name}</h4>
+              )}
 
             </div>
           ))}
         </div>
-
         <SavedTracks />
+        <Recommendations />
       </div>
     );
   }

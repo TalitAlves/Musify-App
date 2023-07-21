@@ -14,7 +14,6 @@ import SavedTracks from "./components/pages/SavedTracks/SavedTracks";
 import Playlists from "./components/pages/Playlist/Playlists";
 import GeneralSearch from "./components/pages/Searcher/GeneralSearch";
 
-
 function App() {
   const [token, setToken] = useState(
     window.localStorage.access_token ? window.localStorage.access_token : null
@@ -22,6 +21,7 @@ function App() {
   const [refresh, setRefresh] = useState(
     window.localStorage.refresh_token ? window.localStorage.refresh_token : null
   );
+
 
   return (
     <>
