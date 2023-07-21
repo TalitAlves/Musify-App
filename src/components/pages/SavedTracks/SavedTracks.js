@@ -64,7 +64,7 @@ const SavedTracks = () => {
         {savedTracks?.slice(0, visibleTracks).map((track) => (
           <div className='saved-track-card' key={track.track.id}>
             <h3 className='saved-trackname'>{track.track.name}</h3>
-            <Link to={`/savedtracks/${track.track.id}`}>
+            <Link to={`/track/${track.track.id}`}>
               <img
                 className='saved-track-img'
                 src={track.track.album.images[ 0 ].url}
