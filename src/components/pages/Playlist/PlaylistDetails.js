@@ -9,8 +9,7 @@ function PlaylistDetails({ selectedPlaylist }) {
   const [newSong, setNewSong] = useState("");
   const { access_token } = useContext(ApiContext);
   const id = selectedPlaylist.id;
-  console.log(selectedPlaylist)
-  console.log( selectedPlaylist.snapshot_id)
+ 
 
 
   //1. llamada a la api con el id de la playlist recebido pro props
@@ -59,7 +58,7 @@ function PlaylistDetails({ selectedPlaylist }) {
   //3. llamada a api para quitar la cancion
   const removeSelectedSong = async ( track ) => {
     const url = `https://api.spotify.com/v1/playlists/${id}/tracks`;
-    console.log(selectedPlaylist)
+   
   
     const requestBody = {
       "tracks": [
@@ -81,7 +80,7 @@ function PlaylistDetails({ selectedPlaylist }) {
       });
   
       console.log("Song removed successfully:", response.data);
-      console.log(track.uri)
+     
     } catch (error) {
       console.error("Error removing song:", error);
     }

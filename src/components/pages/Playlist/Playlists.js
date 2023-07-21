@@ -4,6 +4,7 @@ import axios from "axios";
 import PlaylistDetails from "./PlaylistDetails";
 import "./Playlist.css";
 import PlaylistCreator from "./PlaylistCreator";
+import { Link } from "react-router-dom";
 
 function Playlists() {
   const { access_token } = useContext(ApiContext);
@@ -56,12 +57,17 @@ function Playlists() {
   if (playlist) {
     return (
       <>
+     
         <div className="playlist-container">
+        
           <section className="playlist-names">
+          <Link to={"/search"} className="generalSearch-link">Search</Link>
+          <div>
             <button className="top-buttons">Playlists</button>
             <button onClick={showPlaylistCreator} className="top-buttons">
               +
             </button>
+            </div>
             {playlist?.items?.map((playlist) => {
               return (
                 <div
