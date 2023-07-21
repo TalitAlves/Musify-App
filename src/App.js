@@ -12,6 +12,8 @@ import Details from "./components/pages/ArtistDetails/Details";
 import TrackDetail from "./components/pages/TrackDetail/TrackDetail";
 import SavedTracks from "./components/pages/SavedTracks/SavedTracks";
 import Playlists from "./components/pages/Playlist/Playlists";
+import SavedDetail from "./components/pages/SavedDetail/SavedDetail";
+import SongDetails from "./components/pages/Recommendations/SongDetails";
 
 function App() {
 
@@ -34,8 +36,8 @@ function App() {
               <Route path="/playlists" element={<Playlists />} />
               <Route path="/artists/:id" element={<Details />} />
               <Route path="/savedtracks" element={<SavedTracks />} />
-
-
+              <Route path="/savedtracks/:trackId" element={<SavedDetail />} />
+              <Route path="/song-details/:trackId" element={<SongDetails />} />
             </Routes>
             <Footer />
           </BrowserRouter>

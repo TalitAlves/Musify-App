@@ -3,11 +3,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { ApiContext } from '../../../services/Api';
+import { Link } from 'react-router-dom';
 
 const SavedTracks = () => {
-  const [savedTracks, setSavedTracks] = useState([]);
-  const [visibleTracks, setVisibleTracks] = useState(5);
-  const [totalSavedTracks, setTotalSavedTracks] = useState(0);
+  const [ savedTracks, setSavedTracks ] = useState([]);
+  const [ visibleTracks, setVisibleTracks ] = useState(5);
+  const [ totalSavedTracks, setTotalSavedTracks ] = useState(0);
   const { access_token } = useContext(ApiContext)
 
   useEffect(() => {
@@ -30,16 +31,7 @@ const SavedTracks = () => {
       }
     };
     fetchSavedTracks();
-  }, [access_token]);
-
-  //aquí guardamos la uri de cada canción de las Liked Songs
-  const trackUris = savedTracks.map((track) => track.track.uri);
-  console.log(trackUris);
-
-  //aquí guardamos el id de cada canción 
-  const trackIds = savedTracks.map((track) => track.track.id);
-  console.log(trackIds);
-
+  }, [ access_token ]);
 
   const handleShowMore = () => {
     setVisibleTracks(totalSavedTracks);
@@ -72,12 +64,14 @@ const SavedTracks = () => {
         {savedTracks?.slice(0, visibleTracks).map((track) => (
           <div className='saved-track-card' key={track.track.id}>
             <h3 className='saved-trackname'>{track.track.name}</h3>
-            <img
-              className='saved-track-img'
-              src={track.track.album.images[0].url}
-              alt={track.track.name}
-            />
-            <h4>{track.track.artists[0].name}</h4>
+            <Link to={`/savedtracks/${track.track.id}`}>
+              <img
+                className='saved-track-img'
+                src={track.track.album.images[ 0 ].url}
+                alt={track.track.name}
+              />
+            </Link>
+            <h4>{track.track.artists[ 0 ].name}</h4>
           </div>
         ))}
       </div>

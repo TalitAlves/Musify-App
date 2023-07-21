@@ -3,12 +3,11 @@ import './Recommendations.css';
 import { useContext } from 'react';
 import { ApiContext } from '../../../services/Api';
 import { BeatLoader } from 'react-spinners';
+import { Link } from 'react-router-dom';
 
 const Recommendations = () => {
   const { recApiResponse } = useContext(ApiContext);
   const { seeds, tracks } = recApiResponse;
-  console.log("SEEDS", seeds);
-  //console.log("TRACKS", tracks);
 
   if (!recApiResponse) {
     return <BeatLoader color="#36D7B7" loading={true} size={30} />;
@@ -31,19 +30,20 @@ const Recommendations = () => {
           {tracks.map((track) => (
             <div className='rec-track-card' key={track.id}>
               <h3 className='rec-trackname'>{track.name}</h3>
-              <img className='rec-track-img' src={track?.album.images[ 0 ].url} alt={track.name} />
+              <Link to={`/song-details/${track.id}`}>
+                <img
+                  className='rec-track-img'
+                  src={track?.album.images[ 0 ].url}
+                  alt={track.name}
+                />
+              </Link>
               <h4>{track?.artists[ 0 ]?.name}</h4>
             </div>
           ))}
         </div>
-
       </div>
     )
   }
-
-
-
-
 }
 
 export default Recommendations;
