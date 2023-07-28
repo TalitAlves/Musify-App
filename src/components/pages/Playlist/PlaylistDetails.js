@@ -12,7 +12,7 @@ function PlaylistDetails({ selectedPlaylist }) {
  
 
 
-  //1. llamada a la api con el id de la playlist recebido pro props
+
   useEffect(() => {
     const getPlaylistById = async () => {
       try {
@@ -33,7 +33,7 @@ function PlaylistDetails({ selectedPlaylist }) {
     getPlaylistById(id);
   }, [id, access_token]);
 
-  //2. anadir los tracks ao clicar en +
+
   const handleSongSelected = async (track) => {
     const url = `https://api.spotify.com/v1/playlists/${id}/tracks`;
     const requestBody = {
